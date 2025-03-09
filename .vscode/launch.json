@@ -7,8 +7,8 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "routin_algotithms",
-            "program": "${workspaceFolder}/build/routin_algotithms",
+            "name": "main",
+            "program": "${workspaceFolder}/build/routing-algotithms",
             "args": [],
             "cwd": "${workspaceFolder}"
         }
