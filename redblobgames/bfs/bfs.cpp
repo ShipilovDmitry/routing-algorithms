@@ -60,7 +60,7 @@ void example_2() {
   SquareGrid const grid = makeDiagram1();
   GridLocation start{8, 8};
   auto parents = breadth_first_search(grid, start);
-  drawGrid(grid, nullptr, &parents, nullptr, &start);
+  drawGrid(grid, nullptr, &parents, nullptr, &start, nullptr);
 }
 
 void example_3() {

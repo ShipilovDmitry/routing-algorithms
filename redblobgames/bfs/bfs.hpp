@@ -5,10 +5,7 @@
 
 namespace bfs {
 
-void example_1();
-void example_2();
-void example_3();
-
+// One to all node if possible
 template <typename Location, typename Graph>
 std::unordered_map<Location, Location>
 breadth_first_search(Graph const &graph, Location const &start) {
@@ -32,6 +29,7 @@ breadth_first_search(Graph const &graph, Location const &start) {
   return cameFrom;
 }
 
+// Early exit when achieve the "goal" node
 template <typename Location, typename Graph>
 std::unordered_map<Location, Location>
 breadth_first_search(Graph const &graph, Location const &start,
@@ -59,5 +57,9 @@ breadth_first_search(Graph const &graph, Location const &start,
   }
   return cameFrom;
 }
+
+void example_1();
+void example_2();
+void example_3();
 
 } // namespace bfs
