@@ -1,6 +1,11 @@
 #include "bfs.hpp"
 
+#include "redblobgames/grids.hpp"
+
+using namespace redblobgames;
+
 namespace bfs {
+using Node = SimpleGraph::Node;
 
 void breadthFirstSearch(redblobgames::SimpleGraph const &graph,
                         Node const &start) {
@@ -24,7 +29,7 @@ void breadthFirstSearch(redblobgames::SimpleGraph const &graph,
   }
 }
 
-void example() {
+void example_1() {
   redblobgames::SimpleGraph const example_graph{{
       {'A', {'B'}},
       {'B', {'C'}},
@@ -39,4 +44,22 @@ void example() {
   std::cout << "Reachable from E:\n";
   breadthFirstSearch(example_graph, 'E');
 }
+
+SquareGrid makeDiagram1() {
+  SquareGrid grid(30, 15);
+  grid.addWall(3, 3, 5, 12);
+  grid.addWall(13, 4, 15, 15);
+  grid.addWall(21, 0, 23, 7);
+  grid.addWall(23, 5, 26, 7);
+  return grid;
+}
+
+void example_2() {
+  using namespace redblobgames;
+  SquareGrid const grid = makeDiagram1();
+  GridLocation start{8, 8};
+  auto parents = breadth_first_search(grid, start);
+  drawGrid(grid, nullptr, &parents, nullptr, &start);
+}
+
 } // namespace bfs
