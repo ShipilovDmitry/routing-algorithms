@@ -1,6 +1,7 @@
 #include "bfs.hpp"
 
 #include "redblobgames/grids.hpp"
+#include "redblobgames/utils.hpp"
 
 using namespace redblobgames;
 
@@ -60,6 +61,13 @@ void example_2() {
   GridLocation start{8, 8};
   auto parents = breadth_first_search(grid, start);
   drawGrid(grid, nullptr, &parents, nullptr, &start);
+}
+
+void example_3() {
+  GridLocation start{8, 7}, goal{17, 2};
+  SquareGrid grid = makeDiagram1();
+  auto came_from = breadth_first_search(grid, start, goal);
+  drawGrid(grid, nullptr, &came_from, nullptr, &start, &goal);
 }
 
 } // namespace bfs

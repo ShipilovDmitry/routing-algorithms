@@ -1,6 +1,6 @@
 #include "redblobgames/bfs/bfs.hpp"
 
 int main() {
-  bfs::example_2();
+  bfs::example_3();
   return 0;
 }
