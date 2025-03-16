@@ -1,31 +1,9 @@
 #pragma once
 
-#include <queue>
+#include "redblobgames/utils.hpp"
 #include <vector>
 
 namespace redblobgames::dijkstra {
-
-template <typename T, typename priority_t> struct PriorityQueue {
-public:
-  bool empty() const { return m_elements.empty(); }
-
-  void put(T item, priority_t priority) {
-    m_elements.emplace(priority, std::move(item));
-  }
-
-  T get() {
-    T bestItem = m_elements.top().second;
-    m_elements.pop();
-    return std::move(bestItem);
-  }
-
-private:
-  using PQElement = std::pair<priority_t, T>;
-  std::priority_queue<PQElement, std::vector<PQElement>,
-                      std::greater<PQElement>> // Greater priority is on the top
-                                               // (means less cost)
-      m_elements;
-};
 
 template <typename Location, typename Graph>
 void dijkstraSearch(Graph const &graph, Location const &start,
@@ -57,23 +35,7 @@ void dijkstraSearch(Graph const &graph, Location const &start,
   }
 }
 
-template <typename Location>
-std::vector<Location>
-reconstructPath(Location const &start, Location const &goal,
-                std::unordered_map<Location, Location> const &came_from) {
-  std::vector<Location> path;
-  Location current = goal;
-  if (came_from.find(goal) == came_from.end()) {
-    return path; // no path can be found
-  }
-  while (current != start) {
-    path.push_back(current);
-    current = came_from.at(current);
-  }
-  path.push_back(start); // optional
-  std::reverse(path.begin(), path.end()); // optional
-  return path;
-}
+
 
 void example_1();
 
