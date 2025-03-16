@@ -1,6 +1,6 @@
-#include "redblobgames/dijkstra/dijkstra.hpp"
+#include "redblobgames/astar/astar.hpp"
 
 int main() {
-  redblobgames::dijkstra::example_1();
+  redblobgames::astar::example();
   return 0;
 }
