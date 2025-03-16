@@ -22,10 +22,10 @@ void example_1() {
   GridLocation start{1, 4}, goal{8, 3};
   std::unordered_map<GridLocation, GridLocation> cameFrom;
   std::unordered_map<GridLocation, double> costSoFar;
-  dijkstra_search(grid, start, goal, cameFrom, costSoFar);
+  dijkstraSearch(grid, start, goal, cameFrom, costSoFar);
   redblobgames::drawGrid(grid, nullptr, &cameFrom, nullptr, &start, &goal);
   std::cout << '\n';
-  std::vector<GridLocation> path = reconstruct_path(start, goal, cameFrom);
+  std::vector<GridLocation> path = reconstructPath(start, goal, cameFrom);
   redblobgames::drawGrid(grid, nullptr, nullptr, &path, &start, &goal);
 }
 

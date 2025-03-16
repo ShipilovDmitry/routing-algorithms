@@ -22,15 +22,16 @@ public:
 private:
   using PQElement = std::pair<priority_t, T>;
   std::priority_queue<PQElement, std::vector<PQElement>,
-                      std::greater<PQElement>> // Greater priority is on the top (means less cost)
+                      std::greater<PQElement>> // Greater priority is on the top
+                                               // (means less cost)
       m_elements;
 };
 
 template <typename Location, typename Graph>
-void dijkstra_search(Graph const &graph, Location const &start,
-                     Location const &goal,
-                     std::unordered_map<Location, Location> &cameFrom,
-                     std::unordered_map<Location, double> &costSoFar) {
+void dijkstraSearch(Graph const &graph, Location const &start,
+                    Location const &goal,
+                    std::unordered_map<Location, Location> &cameFrom,
+                    std::unordered_map<Location, double> &costSoFar) {
   PriorityQueue<Location, double> frontier;
   frontier.put(start, 0);
 
@@ -58,8 +59,8 @@ void dijkstra_search(Graph const &graph, Location const &start,
 
 template <typename Location>
 std::vector<Location>
-reconstruct_path(Location const &start, Location const &goal,
-                 std::unordered_map<Location, Location> came_from) {
+reconstructPath(Location const &start, Location const &goal,
+                std::unordered_map<Location, Location> const &came_from) {
   std::vector<Location> path;
   Location current = goal;
   if (came_from.find(goal) == came_from.end()) {
@@ -67,10 +68,10 @@ reconstruct_path(Location const &start, Location const &goal,
   }
   while (current != start) {
     path.push_back(current);
-    current = came_from[current];
+    current = came_from.at(current);
   }
   path.push_back(start); // optional
-  std::reverse(path.begin(), path.end());
+  std::reverse(path.begin(), path.end()); // optional
   return path;
 }
 
