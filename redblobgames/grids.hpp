@@ -18,23 +18,16 @@ struct SimpleGraph {
   std::vector<Node> neighbors(Node id) const { return edges.at(id); }
 };
 
-struct SquareGrid {
-  static constexpr std::array<redblobgames::GridLocation, 4> kDirs{
-      /* East, West, North, South */
-      GridLocation{1, 0}, GridLocation{-1, 0}, GridLocation{0, -1},
-      GridLocation{0, 1}};
-
-  int width, height;
-  std::unordered_set<GridLocation> walls;
-
-  SquareGrid(int width_, int height_) : width(width_), height(height_) {}
+class SquareGrid {
+public:
+  SquareGrid(int width, int height) : m_width(width), m_height(height) {}
 
   bool inBounds(GridLocation const &id) const {
-    return 0 <= id.x && id.x < width && 0 <= id.y && id.y < height;
+    return 0 <= id.x && id.x < m_width && 0 <= id.y && id.y < m_height;
   }
 
   bool passable(GridLocation const &id) const {
-    return walls.find(id) == walls.end();
+    return m_walls.find(id) == m_walls.end();
   }
 
   std::vector<GridLocation> neighbors(GridLocation const &id) const {
@@ -53,6 +46,43 @@ struct SquareGrid {
 
     return results;
   }
+
+  void addWall(int x1, int y1, int x2, int y2) {
+    for (int x = x1; x < x2; ++x) {
+      for (int y = y1; y < y2; ++y) {
+        m_walls.insert(GridLocation{x, y});
+      }
+    }
+  }
+
+  bool insideWall(GridLocation const &id) const {
+    return m_walls.find(id) != m_walls.end();
+  }
+
+  int width() const { return m_width; }
+
+  int height() const { return m_height; }
+
+private:
+  static constexpr std::array<redblobgames::GridLocation, 4> kDirs{
+      /* East, West, North, South */
+      GridLocation{1, 0}, GridLocation{-1, 0}, GridLocation{0, -1},
+      GridLocation{0, 1}};
+
+  int m_width, m_height;
+  std::unordered_set<GridLocation> m_walls;
+};
+
+class GridWithWeights : public SquareGrid {
+public:
+  GridWithWeights(int w, int h) : SquareGrid(w, h) {}
+  double cost(GridLocation from_node, GridLocation to_node) const {
+    return m_forests.find(to_node) != m_forests.end()
+               ? 5
+               : 1; // Forest costs more than regular road
+  }
+
+  std::unordered_set<GridLocation> m_forests;
 };
 
 } // namespace redblobgames

@@ -1,9 +1,12 @@
 #include "bfs.hpp"
 
-namespace bfs {
+#include "redblobgames/grids.hpp"
+#include "redblobgames/utils.hpp"
 
-void breadthFirstSearch(redblobgames::SimpleGraph const &graph,
-                        Node const &start) {
+namespace redblobgames::bfs {
+using Node = SimpleGraph::Node;
+
+void breadthFirstSearch(SimpleGraph const &graph, Node const &start) {
   std::queue<Node> frontier;
   frontier.push(start);
 
@@ -24,8 +27,8 @@ void breadthFirstSearch(redblobgames::SimpleGraph const &graph,
   }
 }
 
-void example() {
-  redblobgames::SimpleGraph const example_graph{{
+void example_1() {
+  SimpleGraph const example_graph{{
       {'A', {'B'}},
       {'B', {'C'}},
       {'C', {'B', 'D', 'F'}},
@@ -39,4 +42,29 @@ void example() {
   std::cout << "Reachable from E:\n";
   breadthFirstSearch(example_graph, 'E');
 }
-} // namespace bfs
+
+SquareGrid makeDiagram1() {
+  SquareGrid grid(30, 15);
+  grid.addWall(3, 3, 5, 12);
+  grid.addWall(13, 4, 15, 15);
+  grid.addWall(21, 0, 23, 7);
+  grid.addWall(23, 5, 26, 7);
+  return grid;
+}
+
+void example_2() {
+  using namespace redblobgames;
+  SquareGrid const grid = makeDiagram1();
+  GridLocation start{8, 8};
+  auto parents = breadth_first_search(grid, start);
+  drawGrid(grid, nullptr, &parents, nullptr, &start, nullptr);
+}
+
+void example_3() {
+  GridLocation start{8, 7}, goal{17, 2};
+  SquareGrid grid = makeDiagram1();
+  auto came_from = breadth_first_search(grid, start, goal);
+  drawGrid(grid, nullptr, &came_from, nullptr, &start, &goal);
+}
+
+} // namespace redblobgames::bfs
