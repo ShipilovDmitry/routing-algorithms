@@ -73,4 +73,16 @@ private:
   std::unordered_set<GridLocation> m_walls;
 };
 
+class GridWithWeights : public SquareGrid {
+public:
+  GridWithWeights(int w, int h) : SquareGrid(w, h) {}
+  double cost(GridLocation from_node, GridLocation to_node) const {
+    return m_forests.find(to_node) != m_forests.end()
+               ? 5
+               : 1; // Forest costs more than regular road
+  }
+
+  std::unordered_set<GridLocation> m_forests;
+};
+
 } // namespace redblobgames

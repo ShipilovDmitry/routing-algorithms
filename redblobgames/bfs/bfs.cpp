@@ -3,13 +3,10 @@
 #include "redblobgames/grids.hpp"
 #include "redblobgames/utils.hpp"
 
-using namespace redblobgames;
-
-namespace bfs {
+namespace redblobgames::bfs {
 using Node = SimpleGraph::Node;
 
-void breadthFirstSearch(redblobgames::SimpleGraph const &graph,
-                        Node const &start) {
+void breadthFirstSearch(SimpleGraph const &graph, Node const &start) {
   std::queue<Node> frontier;
   frontier.push(start);
 
@@ -31,7 +28,7 @@ void breadthFirstSearch(redblobgames::SimpleGraph const &graph,
 }
 
 void example_1() {
-  redblobgames::SimpleGraph const example_graph{{
+  SimpleGraph const example_graph{{
       {'A', {'B'}},
       {'B', {'C'}},
       {'C', {'B', 'D', 'F'}},
@@ -70,4 +67,4 @@ void example_3() {
   drawGrid(grid, nullptr, &came_from, nullptr, &start, &goal);
 }
 
-} // namespace bfs
+} // namespace redblobgames::bfs

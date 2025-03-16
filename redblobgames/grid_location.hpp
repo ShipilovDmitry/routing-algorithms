@@ -3,6 +3,7 @@
 #include <iostream>
 
 namespace redblobgames {
+
 struct GridLocation {
   int x, y;
 };
@@ -15,13 +16,13 @@ inline bool operator!=(GridLocation const &a, GridLocation const &b) {
   return !(a == b);
 }
 
-inline bool operator<(GridLocation a, GridLocation b) {
+inline bool operator<(GridLocation const &a, GridLocation const &b) {
   return std::tie(a.x, a.y) < std::tie(b.x, b.y);
 }
 
 inline std::basic_iostream<char>::basic_ostream &
 operator<<(std::basic_iostream<char>::basic_ostream &out,
-           const GridLocation &loc) {
+           GridLocation const &loc) {
   out << '(' << loc.x << ',' << loc.y << ')';
   return out;
 }
@@ -29,7 +30,7 @@ operator<<(std::basic_iostream<char>::basic_ostream &out,
 
 namespace std {
 template <> struct hash<redblobgames::GridLocation> {
-  std::size_t operator()(const redblobgames::GridLocation &id) const noexcept {
+  std::size_t operator()(redblobgames::GridLocation const &id) const noexcept {
     return std::hash<int>()(id.x ^ (id.y << 16));
   }
 };

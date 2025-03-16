@@ -3,7 +3,7 @@
 #include <queue>
 #include <unordered_map>
 
-namespace bfs {
+namespace redblobgames::bfs {
 
 // One to all node if possible
 template <typename Location, typename Graph>

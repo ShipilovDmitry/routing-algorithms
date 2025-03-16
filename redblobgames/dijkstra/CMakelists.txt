@@ -1,0 +1,8 @@
+set  (SRCS
+    dijkstra.cpp
+)
+
+add_library(rbg-dijkstra ${SRCS})
+target_include_directories(rbg-dijkstra PUBLIC ${PROJECT_SOURCE_DIR})
+
+target_link_libraries(${PROJECT_NAME} rbg-dijkstra)

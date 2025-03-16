@@ -1,6 +1,6 @@
-#include "redblobgames/bfs/bfs.hpp"
+#include "redblobgames/dijkstra/dijkstra.hpp"
 
 int main() {
-  bfs::example_3();
+  redblobgames::dijkstra::example_1();
   return 0;
 }
