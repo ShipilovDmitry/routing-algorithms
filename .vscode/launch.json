@@ -11,6 +11,14 @@
             "program": "${workspaceFolder}/build/routing-algotithms",
             "args": [],
             "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "docker-gdb",
+            "program": "${workspaceFolder}/build/routing-algotithms",
+            "args": ["one", "two", "three"],
+            "cwd": "${workspaceFolder}",
         }
     ]
 }
