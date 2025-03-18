@@ -3,6 +3,7 @@
 #include "grids.hpp"
 #include <iomanip>
 #include <unordered_map>
+#include <queue>
 
 namespace redblobgames {
 
